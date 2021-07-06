@@ -158,19 +158,18 @@ super(props)
 
 ```javascript
 class Mycomponent extends React.Component {
-constructor(props) {
-super(props);
-this.input = React.createRef();
-}
+  constructor(props) {
+    super(props);
+    this.input = React.createRef();
+  }
 
-    render() {
-        return <input type="text" ref={this.inputRef}/>
-    }
+  render() {
+    return <input type="text" ref={this.inputRef} />;
+  }
 
-    componentDidMount() {
-        this.inputRef.current.focus();
-    }
-
+  componentDidMount() {
+    this.inputRef.current.focus();
+  }
 }
 ```
 
@@ -214,7 +213,7 @@ state - это структура данных, который имеет нач
 
 ## 30. Что такое фрагменты ?
 
-Бывают силуации, когда нам неоюходимо отрендерить text  и мы не хотим, чтобы у данного шаблона был корневой элемент.  И по сути не создается родительский элемент, тем самым облегчается html. Второй вариант создания фрагмента <></>. При создании родительского элемента через фрагмент, он будет пустым
+Бывают силуации, когда нам неоюходимо отрендерить text и мы не хотим, чтобы у данного шаблона был корневой элемент. И по сути не создается родительский элемент, тем самым облегчается html. Второй вариант создания фрагмента <></>. При создании родительского элемента через фрагмент, он будет пустым
 
 ```javascript
 render() {
