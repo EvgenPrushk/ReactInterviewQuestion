@@ -448,4 +448,118 @@ Angular - обширный фреймворк, где все решения ес
 
 ## 62 .   Типы данных в JavaScript?
 
-1. Boolean, string, number, Nun, Object, BigInt, Sumbol, 
+1. 7  Примитивных типов данных: Boolean, string, number, , bigInt, sumbol,null, undefined.
+2. Не приммитивный тип данных: Object.
+
+## 63 .   Типы данных в JavaScript?
+
+1. 7  Примитивных типов данных: Boolean, string, number, , bigInt, sumbol,null, undefined.
+2. Не приммитивный тип данных: Object.
+
+## 64 .   Приведение типов в JavaScript?
+console.log(1+'2'); // string 12
+console.log("+1+0) //1
+console.log("-1+0) //-1
+console.log('3'*'8') //24
+console.log(4+10 +'px') //14px
+console.log('px'+ 5+10 +) //px510
+console.log('42'- 40 +) //2
+console.log('42px'- 2 ) //NaN
+console.log(null + 2) //2
+console.log(undefined+ 41) //NaN  т.к. undefined  не приводиться к числу
+
+ // == vs ===  (== сравнивает по значению с приведения типов, === без приведения типов)
+console.log(2 == '2'); // true
+console.log(2 === '2'); // false
+console.log(undefined == null); // true
+console.log(undefined === null); // false
+console.log('0' == false); // true
+console.log('0' == 0); // true
+console.log('0' === 0); // false
+console.log('0' === false); // false
+
+// Неодназначные сравнения
+https://dorey.github.io/JavaScript-Equality-Table/
+console.log(false == ''); // true
+console.log(false == []); // true
+console.log(false == {}); // false т.к  объект приводиться к строке 'object object'
+console.log('' == 0); // true
+console.log('' == []); // true
+console.log('' == {}); // false
+console.log(0 == null) //false
+
+## 64 .   Отсортировать массив чисел?
+const array= [1,25, 55,77, -5,108]
+array.sort((a,b)=> {return a -b}));
+
+
+## 64 .   Перебирающие методы массива?
+1. Map -  возвращает новый массив не изменяя исходный,  выполняя действия над  каждым элементом массива
+2. filter
+3. .forEach
+4. .reduce
+Arrray.prototype.myMap = function(callback){
+const result=[]
+const theisArray = this
+for(let i= 0; i< theisArray.length; i++){
+result.push(callback(theisArray[i], i, theisArray))
+
+}
+return result
+}
+## 65 .   Управляемые и не управляемые компоненты?
+
+ const [state, setState]= useState()
+ const input2 =useRef();
+ const click =() =>{
+ console.log(state)
+ console.log(input2.current.values)
+ }
+ return(
+ <div>
+ <input onchange={(event)=> setState(event.target.value))  placeholder='Управляемый'/>
+   <input ref={input2}  placeholder='Не управляемый'/>
+  <button onClick={click}>Get Value </button>
+   </div>
+ )
+ 
+ ## 65 .   Что ввела ЕS6?
+ 
+1. Введены let  и const
+2. Объект можно делать const.
+3. Диструктуризаци объекта или массива.
+4. Итераторы  for of   для перебора элементов массива.
+5. Итераторы  for of   для перебора и разбиение строки по символьно.
+6. ``  для переноса строк.
+7. В функцию можно передавать значение по умаолчанию
+8. Диструктуризация в функциях
+9. Стрелочные функции.
+10. Мультилайн  string \n.
+11. Наследование с помощью   super и extends.
+
+ ## 66 .   Что ввела ЕS7?
+ 
+1. Array.includes() - содержит ли массив значение  или массив значений.
+2. Math.pow() - оператор возведения в степень
+
+ ## 67.   Что ввела ЕS8?
+ 1. String — padStart() и padEnd() // const str1 = 'test'.padEnd(10,'*') заполняет строку символами до нужно длины
+ 2. Object.values() // const person = { name: 'Fred', age: 87 } const personValues = Object.values(person) console.log(personValues)  ['Fred', 87]
+ 3. Метод Object.entries() // const person = { name: 'Fred', age: 87 }  const personValues = Object.entries(person) 
+ console.log(personValues) // [['name', 'Fred'], ['age', 87]]
+ 4.Object.getOwnPropertyDescriptors(obj) -он принимает объект, сведения о свойствах которого нужно узнать, и возвращает объект, содержащий эти сведения.
+ const person = { name: 'Fred', age: 87 }
+const propDescr = Object.getOwnPropertyDescriptors(person)
+console.log(propDescr) 
+/*
+{ name:
+   { value: 'Fred',
+     writable: true,
+     enumerable: true,
+     configurable: true },
+  age:
+   { value: 87,
+     writable: true,
+     enumerable: true,
+     configurable: true } }
+*/
