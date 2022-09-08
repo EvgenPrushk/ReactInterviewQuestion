@@ -551,8 +551,8 @@ const person = { name: 'Fred', age: 87 }
 const personValues = Object.entries(person) 
 console.log(personValues) // [['name', 'Fred'], ['age', 87]]
 ```
- 4.Object.getOwnPropertyDescriptors(obj) -он принимает объект, сведения о свойствах которого нужно узнать, и возвращает объект, содержащий эти сведения.
-
+ 5.Object.getOwnPropertyDescriptors(obj) -он принимает объект, сведения о свойствах которого нужно узнать, и возвращает объект, содержащий эти сведения.
+Один из вариантов сделать копию объекта и копирует геттеры и сеттеры в отличиие Object.assign()
 ```javascript
 const person = { name: 'Fred', age: 87 }
 const propDescr = Object.getOwnPropertyDescriptors(person)
@@ -569,3 +569,206 @@ console.log(propDescr)
      enumerable: true,
      configurable: true } }
 ```
+6. Завершающие запятые в параметрах функций
+7. Асинхронные функции 
+В стандарте ES2017 появилась конструкция async/await, которую можно считать важнейшим новшеством этой версии языка.
+
+Асинхронные функции представляют собой комбинацию промисов и генераторов, они упрощают конструкции, для описания которых раньше требовался большой объём шаблонного кода и неудобные в работе цепочки промисов. Фактически, речь идёт о высокоуровневой абстракции над промисами.
+
+Когда в стандарте ES2015 появились промисы, они призваны были решить существующие проблемы с асинхронным кодом, что они и сделали. Но за те два года, которые разделяют стандарты ES2015 и ES2017, стало ясно, что промисы нельзя считать окончательным решением этих проблем.
+
+В частности, промисы были нацелены на решение проблемы «ада коллбэков», но, решив эту проблему, они сами показали себя не с лучшей стороны из-за усложнения кода, в котором они используются. Собственно говоря, конструкция async/await решает проблему промисов и повышает удобство работы с асинхронным кодом.
+```javascript
+function doSomethingAsync() {
+  return new Promise((resolve) => {
+      setTimeout(() => resolve('I did something'), 3000)
+  })
+}
+async function doSomething() {
+  console.log(await doSomethingAsync())
+}
+console.log('Before')
+doSomething()
+console.log('After')
+```
+Как видно, после вызова doSomething() программа продолжает выполняться, после Before в консоль тут же выводится After, а после того, как пройдут три секунды, выводится I did something.
+
+8. Последовательный вызов асинхронных функций
+При необходимости асинхронные функции могут формировать нечто вроде цепочек вызовов. Такие конструкции отличаются лучшей читабельностью, чем нечто подобное, основанное исключительно на промисах. Это можно видеть на следующем примере.
+```javascript
+function promiseToDoSomething() {
+  return new Promise((resolve)=>{
+      setTimeout(() => resolve('I did something'), 10000)
+  })
+}
+async function watchOverSomeoneDoingSomething() {
+  const something = await promiseToDoSomething()
+  return something + ' and I watched'
+Здесь речь идёт об объекте SharedArrayBuffer, который позволяет описывать разделяемые области памяти, и об объекте Atomics, который содержит набор атомарных операций в виде статических методов. Подробности о возможностях, которые дают программисту эти объекты, можно почитать здесь.
+async function watchOverSomeoneWatchingSomeoneDoingSomething() {
+  const something = await watchOverSomeoneDoingSomething()
+  return something + ' and I watched as well'
+}
+watchOverSomeoneWatchingSomeoneDoingSomething().then((res) => {
+  console.log(res) // I did something and I watched and I watched as well
+})
+```
+
+9. Разделяемая память и атомарные операции
+Здесь речь идёт об объекте SharedArrayBuffer, который позволяет описывать разделяемые области памяти, и об объекте Atomics, который содержит набор атомарных операций в виде статических методов. Подробности о возможностях, которые дают программисту эти объекты, можно почитать здесь.
+
+
+ ## 68.   Что ввела то ввела ЕS9?
+ 1. Применение операторов spread и rest к объектам
+ Мы уже говорили об операторах rest и spread, которые появились в ES6 и могут быть использованы для работы с массивами. Оба они выглядят как три точки. Оператор rest, в следующем примере деструктурирования массива, позволяет поместить его первый и второй элементы в константы first и second, а все остальные — в константу others.
+ ```javascript
+const numbers = [1, 2, 3, 4, 5]
+const [first, second, ...others] = numbers
+console.log(first) //1
+console.log(second) //2
+console.log(others) //[ 3, 4, 5 ]
+```
+Оператор spread позволяет передавать массивы в функции, ожидающие обычные списки параметров.
+ ```javascript
+const numbers = [1, 2, 3, 4, 5]
+const sum = (a, b, c, d, e) => a + b + c + d + e
+const res = sum(...numbers)
+console.log(res) //15
+```
+Теперь, используя тот же подход, можно работать и с объектами. Вот пример использования оператора rest в операции деструктурирующего присваивания.
+ ```javascript
+const { first, second, ...others } = 
+  { first: 1, second: 2, third: 3, fourth: 4, fifth: 5 }
+console.log(first) //1
+console.log(second) //2
+console.log(others) //{ third: 3, fourth: 4, fifth: 5 }
+```
+Вот оператор spread, применяемый при создании нового объекта на основе существующего. Этот пример продолжает предыдущий.
+ ```javascript
+const items = { first, second, ...others }
+console.log(items) //{ first: 1, second: 2, third: 3, fourth: 4, fifth: 5 }
+```
+
+2.Асинхронные итераторы
+
+Новая конструкция for-await-of позволяет вызывать асинхронные функции, возвращающие промисы, в циклах. Такие циклы ожидают разрешения промиса перед переходом к следующему шагу. Вот как это выглядит.
+ ```javascript
+for await (const line of readLines(filePath)) {
+  console.log(line)
+}
+```
+3. Метод Promise.prototype.finally()
+Если промис успешно разрешается — осуществляется вызов очередного метода then(). Если что-то идёт не так — вызывается метод catch(). Метод finally() позволяет выполнять некий код независимо от того, что происходило до этого.
+ ```javascript
+fetch('file.json')
+  .then(data => data.json())
+  .catch(error => console.error(error))
+  .finally(() => console.log('finished'))
+```
+4. Улучшения регулярных выражений
+В регулярных выражениях появилась возможность ретроспективной проверки строк (?<=). Это позволяет искать в строках некие конструкции, перед которыми есть какие-то другие конструкции.
+
+Возможность опережающих проверок, использующая конструкцию ?=, имелась в регулярных выражениях, реализованных в JavaScript, и до стандарта ES2018. Такие проверки позволяют узнать, следует ли за неким фрагментом строки другой фрагмент.
+ ```javascript
+const r = /Roger(?= Waters)/
+const res1 = r.test('Roger is my dog')
+const res2 = r.test('Roger is my dog and Roger Waters is a famous musician')
+console.log(res1) //false
+console.log(res2) //true
+```
+Конструкция ?! выполняет обратную операцию — совпадение будет найдено только в том случае, если за заданной строкой не идёт другая строка.
+ ```javascript
+const r = /Roger(?! Waters)/g
+const res1 = r.test('Roger is my dog')
+const res2 = r.test('Roger is my dog and Roger Waters is a famous musician')
+console.log(res1) //true
+console.log(res2) //false
+```
+При ретроспективной проверке, как уже было сказано, используется конструкция ?<=.
+ ```javascript
+const r = /(?<=Roger) Waters/
+const res1 = r.test('Pink Waters is my dog')
+const res2 = r.test('Roger is my dog and Roger Waters is a famous musician')
+console.log(res1) //false
+console.log(res2) //true
+```
+Операцию, обратную описанной, можно выполнить с помощью конструкции ?<!.
+ ```javascript
+const r = /(?<!Roger) Waters/
+const res1 = r.test('Pink Waters is my dog')
+const res2 = r.test('Roger is my dog and Roger Waters is a famous musician')
+console.log(res1) //true
+console.log(res2) //false
+```
+Управляющие последовательности Unicode в регулярных выражениях
+В регулярных выражениях можно использовать класс \d, соответствующий любой цифре, класс \s, соответствующий любому пробельному символу, класс \w, который соответствует любому буквенно-цифровому символу, и так далее. Возможность, о которой идёт речь, расширяет набор классов, которыми можно пользоваться в регулярных выражениях, позволяя работать с Unicode-последовательностями. Речь идёт о классе \p{} и об обратном ему классе \P{}.
+
+В Unicode каждый символ имеет набор свойств. Эти свойства указываются в фигурных скобках группы \p{}. Так, например, свойство Script определяет семейство языков, к которому принадлежит символ, свойство ASCII, логическое, принимает значение true для ASCII-символов, и так далее. Например, выясним, содержат ли некие строки исключительно ASCII-символы.
+ ## 68.   Что ввела то ввела ЕS10?
+ 1. Array.flat() и Array.flatMap()
+ Метод Array.flat() возвращает новый массив, в котором все элементы вложенных подмассивов были рекурсивно подняты на указанный уровень depth.
+Метод Array.flatMap() сначала применяет функцию к каждому элементу, а затем преобразует полученный результат в плоскую структуру и помещает в новый массив. Это идентично функции map() с последующим применением функции flat() с параметром depth, равным 1, но flatMap() чаще более эффективен, поскольку совмещает в себе оба подхода в одном методе.
+
+2. String.trimStart() & String.trimEnd()
+могут быть использованы для обрезки пробелов в начале или в конце строки.
+ ```javascript
+const greeting = "    Hello everyone";
+console.log(greeting.trimStart());
+// "Hello everyone"
+```
+ ```javascript
+const greeting = "Hello world    ";
+console.log(greeting.trimEnd());
+// "Hello world"
+```
+3. Необязательная привязка catch
+ ```javascript
+try {
+  // some code
+} catch {
+  // error handling code
+}
+```
+4. Object.fromEntries()
+Object.fromEntries() создает объект или преобразует пары ключ-значение в объект. Он принимает только итерации: Object.fromEntries(someIterable).
+ ```javascript
+const students = new Map([
+  ["name", "john"],
+  ["age", 22],
+]);
+
+console.log(Object.fromEntries(students));
+// { name: 'john', age: 22 }
+
+const students = [
+  ["john", 22],
+  ["alex", 22],
+  ["julia", 21],
+  ["alex", 20],
+];
+
+Сценарий, который приводит к потери данных:
+
+const studentObj = Object.fromEntries(students);
+// { john: 22, alex: 20, julia: 21 }
+// первый alex был перезаписан
+```
+5. Symbol.description
+Свойство description только для чтения - это строка, возвращающая необязательное описание объектов Symbol.
+ ```javascript
+const mySymbol = `My Symbol`;
+
+const symObj = Symbol(mySymbol);
+
+console.log(symObj); // Symbol(mySymbol);
+
+console.log(String(symObj) === `Symbol(${mySymbol})`); // true
+
+console.log(symObj.description); // "My Symbol"
+```
+6. Хорошо сформированный JSON.stringify()
+Исправленный вывод JSON.stringify() при обработке суррогатных кодовых точек UTF-8 (от U+D800 до U+DFFF).
+
+Перед этим изменением вызов JSON.stringify() возвращал некорректный символ Unicode («�»).
+
+Теперь эти суррогатные кодовые точки можно безопасно представить в виде строк, используя JSON.stringify(), и преобразовать обратно в их исходное представление, используя JSON.parse().
