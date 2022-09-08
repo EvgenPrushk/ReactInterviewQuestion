@@ -531,8 +531,15 @@ return result
 2. Math.pow() - оператор возведения в степень
 
  ## 67.   Что ввела ЕS8?
- 1. String — padStart() и padEnd() // const str1 = 'test'.padEnd(10,'*') заполняет строку символами до нужно длины
- 2. Object.values() 
+ 1. String — padStart() и padEnd()
+   ```javascript
+const str = 'test'.padStart(10)
+const str1 = 'test'.padEnd(10,'*')
+
+console.log(`'${str}'`) //'      test'
+console.log(`'${str1}'`) //'test******'
+```
+ 3. Object.values() 
   ```javascript
 const person = { name: 'Fred', age: 87 }
 const personValues = Object.values(person) 
@@ -545,7 +552,7 @@ const personValues = Object.entries(person)
 console.log(personValues) // [['name', 'Fred'], ['age', 87]]
 ```
  4.Object.getOwnPropertyDescriptors(obj) -он принимает объект, сведения о свойствах которого нужно узнать, и возвращает объект, содержащий эти сведения.
- */
+
 ```javascript
 const person = { name: 'Fred', age: 87 }
 const propDescr = Object.getOwnPropertyDescriptors(person)
