@@ -255,20 +255,8 @@ const Mycontext = React.createContext(defaultValue);
 
 Это такие конструкции, которые как input принимают component и добавляют к нему какой-то функционал(возможности) и на выходе мы получает новый компонент с расширенными возможностями
 
-```javascript
-function logProps(WrappedComponent) {
-    class LogProps extends React.Component{
-        componentDidUpdate(prevProps) {
-            console.log('old props:', prevProps);
-            console.log('new props:', props);
-        }
-        render() {
-            return <WrappedComponent {...this.props}/>
-        }
-    }
-    return Logprops
-}
-```
+
+
 
 ## 36. Что делает shoudComponentUpdate и почему он важен?
 
@@ -548,7 +536,9 @@ return result
  3. Метод Object.entries() // const person = { name: 'Fred', age: 87 }  const personValues = Object.entries(person) 
  console.log(personValues) // [['name', 'Fred'], ['age', 87]]
  4.Object.getOwnPropertyDescriptors(obj) -он принимает объект, сведения о свойствах которого нужно узнать, и возвращает объект, содержащий эти сведения.
- const person = { name: 'Fred', age: 87 }
+ */
+```javascript
+const person = { name: 'Fred', age: 87 }
 const propDescr = Object.getOwnPropertyDescriptors(person)
 console.log(propDescr) 
 /*
@@ -562,4 +552,4 @@ console.log(propDescr)
      writable: true,
      enumerable: true,
      configurable: true } }
-*/
+```
