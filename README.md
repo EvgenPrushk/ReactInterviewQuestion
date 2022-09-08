@@ -532,9 +532,18 @@ return result
 
  ## 67.   Что ввела ЕS8?
  1. String — padStart() и padEnd() // const str1 = 'test'.padEnd(10,'*') заполняет строку символами до нужно длины
- 2. Object.values() // const person = { name: 'Fred', age: 87 } const personValues = Object.values(person) console.log(personValues)  ['Fred', 87]
- 3. Метод Object.entries() // const person = { name: 'Fred', age: 87 }  const personValues = Object.entries(person) 
- console.log(personValues) // [['name', 'Fred'], ['age', 87]]
+ 2. Object.values() 
+  ```javascript
+const person = { name: 'Fred', age: 87 }
+const personValues = Object.values(person) 
+console.log(personValues) // ['Fred', 87]
+```
+ 4. Метод Object.entries() 
+ ```javascript
+const person = { name: 'Fred', age: 87 }
+const personValues = Object.entries(person) 
+console.log(personValues) // [['name', 'Fred'], ['age', 87]]
+```
  4.Object.getOwnPropertyDescriptors(obj) -он принимает объект, сведения о свойствах которого нужно узнать, и возвращает объект, содержащий эти сведения.
  */
 ```javascript
