@@ -428,17 +428,14 @@ Angular - обширный фреймворк, где все решения ес
 
 ### JavaScript
 
-## 62 .   Типы данных в JavaScript?
+## 62. Типы данных в JavaScript?
 
 1. 7  Примитивных типов данных: Boolean, string, number, , bigInt, sumbol,null, undefined.
 2. Не приммитивный тип данных: Object.
 
-## 63 .   Типы данных в JavaScript?
+## 63.   Приведение типов в JavaScript?
 
-1. 7  Примитивных типов данных: Boolean, string, number, , bigInt, sumbol,null, undefined.
-2. Не приммитивный тип данных: Object.
-
-## 64 .   Приведение типов в JavaScript?
+```javascript
 console.log(1+'2'); // string 12
 console.log("+1+0) //1
 console.log("-1+0) //-1
@@ -469,8 +466,10 @@ console.log('' == 0); // true
 console.log('' == []); // true
 console.log('' == {}); // false
 console.log(0 == null) //false
+```
 
 ## 64 .   Отсортировать массив чисел?
+
 const array= [1,25, 55,77, -5,108]
 array.sort((a,b)=> {return a -b}));
 
