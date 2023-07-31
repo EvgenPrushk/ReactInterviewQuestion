@@ -470,11 +470,13 @@ console.log(0 == null) //false
 
 ## 64 .   Отсортировать массив чисел?
 
+```javascript
 const array= [1,25, 55,77, -5,108]
 array.sort((a,b)=> {return a -b}));
-
+```
 
 ## 64 .   Перебирающие методы массива?
+
 1. Map -  возвращает новый массив не изменяя исходный,  выполняя действия над  каждым элементом массива
 2. filter
 3. .forEach
@@ -488,8 +490,10 @@ result.push(callback(theisArray[i], i, theisArray))
 }
 return result
 }
+
 ## 65 .   Управляемые и не управляемые компоненты?
 
+```javascript
  const [state, setState]= useState()
  const input2 =useRef();
  const click =() =>{
@@ -503,6 +507,7 @@ return result
   <button onClick={click}>Get Value </button>
    </div>
  )
+```
  
  ## 65 .   Что ввела ЕS6?
  
@@ -526,27 +531,33 @@ return result
  ## 67.   Что ввела ЕS8?
  
  1. String — padStart() и padEnd()
-   ```javascript
+    
+```javascript
 const str = 'test'.padStart(10)
 const str1 = 'test'.padEnd(10,'*')
 
 console.log(`'${str}'`) //'      test'
 console.log(`'${str1}'`) //'test******'
 ```
- 3. Object.values() 
-  ```javascript
+
+3. Object.values()
+   
+```javascript
 const person = { name: 'Fred', age: 87 }
 const personValues = Object.values(person) 
 console.log(personValues) // ['Fred', 87]
 ```
- 4. Метод Object.entries() 
+ 4. Метод Object.entries()
+     
  ```javascript
 const person = { name: 'Fred', age: 87 }
 const personValues = Object.entries(person) 
 console.log(personValues) // [['name', 'Fred'], ['age', 87]]
 ```
+
  5.Object.getOwnPropertyDescriptors(obj) -он принимает объект, сведения о свойствах которого нужно узнать, и возвращает объект, содержащий эти сведения.
 Один из вариантов сделать копию объекта и копирует геттеры и сеттеры в отличиие Object.assign()
+
 ```javascript
 const person = { name: 'Fred', age: 87 }
 const propDescr = Object.getOwnPropertyDescriptors(person)
@@ -563,6 +574,7 @@ console.log(propDescr)
      enumerable: true,
      configurable: true } }
 ```
+
 6. Завершающие запятые в параметрах функций
 7. Асинхронные функции 
 В стандарте ES2017 появилась конструкция async/await, которую можно считать важнейшим новшеством этой версии языка.
@@ -572,6 +584,7 @@ console.log(propDescr)
 Когда в стандарте ES2015 появились промисы, они призваны были решить существующие проблемы с асинхронным кодом, что они и сделали. Но за те два года, которые разделяют стандарты ES2015 и ES2017, стало ясно, что промисы нельзя считать окончательным решением этих проблем.
 
 В частности, промисы были нацелены на решение проблемы «ада коллбэков», но, решив эту проблему, они сами показали себя не с лучшей стороны из-за усложнения кода, в котором они используются. Собственно говоря, конструкция async/await решает проблему промисов и повышает удобство работы с асинхронным кодом.
+
 ```javascript
 function doSomethingAsync() {
   return new Promise((resolve) => {
@@ -585,10 +598,12 @@ console.log('Before')
 doSomething()
 console.log('After')
 ```
+
 Как видно, после вызова doSomething() программа продолжает выполняться, после Before в консоль тут же выводится After, а после того, как пройдут три секунды, выводится I did something.
 
 8. Последовательный вызов асинхронных функций
 При необходимости асинхронные функции могут формировать нечто вроде цепочек вызовов. Такие конструкции отличаются лучшей читабельностью, чем нечто подобное, основанное исключительно на промисах. Это можно видеть на следующем примере.
+
 ```javascript
 function promiseToDoSomething() {
   return new Promise((resolve)=>{
@@ -607,14 +622,14 @@ watchOverSomeoneWatchingSomeoneDoingSomething().then((res) => {
   console.log(res) // I did something and I watched and I watched as well
 })
 ```
-
-9. Разделяемая память и атомарные операции
+9. Разделяемая память и атомарные операции    
 Здесь речь идёт об объекте SharedArrayBuffer, который позволяет описывать разделяемые области памяти, и об объекте Atomics, который содержит набор атомарных операций в виде статических методов. Подробности о возможностях, которые дают программисту эти объекты, можно почитать здесь.
 
  ## 68.   Что ввела то ввела ЕS9?
  
  1. Применение операторов spread и rest к объектам
  Мы уже говорили об операторах rest и spread, которые появились в ES6 и могут быть использованы для работы с массивами. Оба они выглядят как три точки. Оператор rest, в следующем примере деструктурирования массива, позволяет поместить его первый и второй элементы в константы first и second, а все остальные — в константу others.
+
  ```javascript
 const numbers = [1, 2, 3, 4, 5]
 const [first, second, ...others] = numbers
@@ -622,14 +637,18 @@ console.log(first) //1
 console.log(second) //2
 console.log(others) //[ 3, 4, 5 ]
 ```
+
 Оператор spread позволяет передавать массивы в функции, ожидающие обычные списки параметров.
+
  ```javascript
 const numbers = [1, 2, 3, 4, 5]
 const sum = (a, b, c, d, e) => a + b + c + d + e
 const res = sum(...numbers)
 console.log(res) //15
 ```
+
 Теперь, используя тот же подход, можно работать и с объектами. Вот пример использования оператора rest в операции деструктурирующего присваивания.
+
  ```javascript
 const { first, second, ...others } = 
   { first: 1, second: 2, third: 3, fourth: 4, fifth: 5 }
@@ -637,7 +656,9 @@ console.log(first) //1
 console.log(second) //2
 console.log(others) //{ third: 3, fourth: 4, fifth: 5 }
 ```
+
 Вот оператор spread, применяемый при создании нового объекта на основе существующего. Этот пример продолжает предыдущий.
+
  ```javascript
 const items = { first, second, ...others }
 console.log(items) //{ first: 1, second: 2, third: 3, fourth: 4, fifth: 5 }
@@ -646,23 +667,28 @@ console.log(items) //{ first: 1, second: 2, third: 3, fourth: 4, fifth: 5 }
 2.Асинхронные итераторы
 
 Новая конструкция for-await-of позволяет вызывать асинхронные функции, возвращающие промисы, в циклах. Такие циклы ожидают разрешения промиса перед переходом к следующему шагу. Вот как это выглядит.
+ 
  ```javascript
 for await (const line of readLines(filePath)) {
   console.log(line)
 }
 ```
+
 3. Метод Promise.prototype.finally()
 Если промис успешно разрешается — осуществляется вызов очередного метода then(). Если что-то идёт не так — вызывается метод catch(). Метод finally() позволяет выполнять некий код независимо от того, что происходило до этого.
+ 
  ```javascript
 fetch('file.json')
   .then(data => data.json())
   .catch(error => console.error(error))
   .finally(() => console.log('finished'))
 ```
+
 4. Улучшения регулярных выражений
 В регулярных выражениях появилась возможность ретроспективной проверки строк (?<=). Это позволяет искать в строках некие конструкции, перед которыми есть какие-то другие конструкции.
 
 Возможность опережающих проверок, использующая конструкцию ?=, имелась в регулярных выражениях, реализованных в JavaScript, и до стандарта ES2018. Такие проверки позволяют узнать, следует ли за неким фрагментом строки другой фрагмент.
+ 
  ```javascript
 const r = /Roger(?= Waters)/
 const res1 = r.test('Roger is my dog')
@@ -670,7 +696,9 @@ const res2 = r.test('Roger is my dog and Roger Waters is a famous musician')
 console.log(res1) //false
 console.log(res2) //true
 ```
+
 Конструкция ?! выполняет обратную операцию — совпадение будет найдено только в том случае, если за заданной строкой не идёт другая строка.
+ 
  ```javascript
 const r = /Roger(?! Waters)/g
 const res1 = r.test('Roger is my dog')
@@ -678,7 +706,9 @@ const res2 = r.test('Roger is my dog and Roger Waters is a famous musician')
 console.log(res1) //true
 console.log(res2) //false
 ```
+
 При ретроспективной проверке, как уже было сказано, используется конструкция ?<=.
+ 
  ```javascript
 const r = /(?<=Roger) Waters/
 const res1 = r.test('Pink Waters is my dog')
@@ -686,7 +716,9 @@ const res2 = r.test('Roger is my dog and Roger Waters is a famous musician')
 console.log(res1) //false
 console.log(res2) //true
 ```
+
 Операцию, обратную описанной, можно выполнить с помощью конструкции ?<!.
+ 
  ```javascript
 const r = /(?<!Roger) Waters/
 const res1 = r.test('Pink Waters is my dog')
@@ -694,6 +726,7 @@ const res2 = r.test('Roger is my dog and Roger Waters is a famous musician')
 console.log(res1) //true
 console.log(res2) //false
 ```
+
 Управляющие последовательности Unicode в регулярных выражениях
 В регулярных выражениях можно использовать класс \d, соответствующий любой цифре, класс \s, соответствующий любому пробельному символу, класс \w, который соответствует любому буквенно-цифровому символу, и так далее. Возможность, о которой идёт речь, расширяет набор классов, которыми можно пользоваться в регулярных выражениях, позволяя работать с Unicode-последовательностями. Речь идёт о классе \p{} и об обратном ему классе \P{}.
 
@@ -707,17 +740,21 @@ console.log(res2) //false
 
 2. String.trimStart() & String.trimEnd()
 могут быть использованы для обрезки пробелов в начале или в конце строки.
+ 
  ```javascript
 const greeting = "    Hello everyone";
 console.log(greeting.trimStart());
 // "Hello everyone"
 ```
+
  ```javascript
 const greeting = "Hello world    ";
 console.log(greeting.trimEnd());
 // "Hello world"
 ```
+
 3. Необязательная привязка catch
+ 
  ```javascript
 try {
   // some code
